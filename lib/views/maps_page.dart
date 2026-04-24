@@ -12,12 +12,14 @@ class MapsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarCustom(
-        title: "Maps",
+        title: [Text('Maps')],
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
           icon: const Icon(Icons.arrow_back),
         ),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.menu_book))],
+        actions: [
+          IconButton(onPressed: () {}, icon: const Icon(Icons.menu_book)),
+        ],
       ),
       body: Stack(
         children: [
@@ -45,104 +47,114 @@ class MapsPage extends StatelessWidget {
           ),
         ],
       ),
-      bottomSheet: Container(
-        height: 80,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10)],
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-        ),
-        child: const Center(
-          child: Text("Swipe up or click button to see details"),
-        ),
-      ),
     );
   }
 
   void _showMyBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
-      ),
+      isScrollControlled: true,
+      enableDrag: true,
+      backgroundColor: Colors.transparent,
       builder: (context) {
-        return Container(
-          padding: const EdgeInsets.all(20),
-          height: 300,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Container(
-                  width: 50,
-                  height: 5,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[300],
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
+        return DraggableScrollableSheet(
+          expand: false,
+          initialChildSize: 0.28,
+          minChildSize: 0.14,
+          maxChildSize: 0.75,
+          builder: (context, scrollController) {
+            return Container(
+              padding: const EdgeInsets.all(20),
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
               ),
-              SizedBox(height: 20),
-              InputCustom(
-                text: "Search Object",
-                suffix: Icon(Icons.search, color: fromCssColor("#5061FF")),
-              ),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(5),
-                        child: Icon(Icons.cookie_outlined, size: 30),
-                      ),
-                      Text("Cookie"),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(5),
-                        child: Icon(Icons.cookie_outlined, size: 30),
-                      ),
-                      Text("Cookie"),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(5),
-                        child: Icon(Icons.cookie_outlined, size: 30),
-                      ),
-                      Text("Cookie"),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(5),
-                        child: Icon(Icons.cookie_outlined, size: 30),
-                      ),
-                      Text("Cookie"),
-                    ],
-                  ),
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              child: SingleChildScrollView(
+                controller: scrollController,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Column(
-                      children: [Text("Jakarta Street"), Text("Naufal's Shop")],
+                    Center(
+                      child: Container(
+                        width: 50,
+                        height: 5,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[300],
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
                     ),
-                    Icon(Icons.coffee_maker),
+                    const SizedBox(height: 20),
+                    InputCustom(
+                      text: "Search Object",
+                      suffix: Icon(
+                        Icons.search,
+                        color: fromCssColor("#5061FF"),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          children: const [
+                            Padding(
+                              padding: EdgeInsets.all(5),
+                              child: Icon(Icons.cookie_outlined, size: 30),
+                            ),
+                            Text("Cookie"),
+                          ],
+                        ),
+                        Column(
+                          children: const [
+                            Padding(
+                              padding: EdgeInsets.all(5),
+                              child: Icon(Icons.cookie_outlined, size: 30),
+                            ),
+                            Text("Cookie"),
+                          ],
+                        ),
+                        Column(
+                          children: const [
+                            Padding(
+                              padding: EdgeInsets.all(5),
+                              child: Icon(Icons.cookie_outlined, size: 30),
+                            ),
+                            Text("Cookie"),
+                          ],
+                        ),
+                        Column(
+                          children: const [
+                            Padding(
+                              padding: EdgeInsets.all(5),
+                              child: Icon(Icons.cookie_outlined, size: 30),
+                            ),
+                            Text("Cookie"),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Text("Jakarta Street"),
+                              Text("Naufal's Shop"),
+                            ],
+                          ),
+                          const Icon(Icons.coffee_maker),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
-            ],
-          ),
+            );
+          },
         );
       },
     );

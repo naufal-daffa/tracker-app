@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tracking_app/views/chat_page.dart';
 import 'package:tracking_app/views/login_page.dart';
 import 'package:tracking_app/views/maps_page.dart';
 import 'package:tracking_app/views/registration_page.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      home: MapsPage(),
+      home: ChatPage(),
     );
   }
 }
