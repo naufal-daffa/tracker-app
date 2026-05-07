@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart'; // Jangan lupa import ini
 import 'package:from_css_color/from_css_color.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:tracking_app/views/chat_page.dart';
 import 'package:tracking_app/widgets/app_bar.dart';
 import 'package:tracking_app/widgets/input.dart';
 
@@ -37,7 +38,7 @@ class MapsPage extends StatelessWidget {
           ),
 
           Positioned(
-            bottom: 100,
+            bottom: 10,
             right: 20,
             child: FloatingActionButton(
               onPressed: () => _showMyBottomSheet(context),
@@ -59,9 +60,9 @@ class MapsPage extends StatelessWidget {
       builder: (context) {
         return DraggableScrollableSheet(
           expand: false,
-          initialChildSize: 0.28,
-          minChildSize: 0.14,
-          maxChildSize: 0.75,
+          initialChildSize: 0.95,
+          minChildSize: 0.8,
+          maxChildSize: 1,
           builder: (context, scrollController) {
             return Container(
               padding: const EdgeInsets.all(20),
@@ -136,18 +137,26 @@ class MapsPage extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text("Jakarta Street"),
-                              Text("Naufal's Shop"),
-                            ],
-                          ),
-                          const Icon(Icons.coffee_maker),
-                        ],
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ChatPage()),
+                          );
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: const [
+                                Text("Jakarta Street"),
+                                Text("Naufal's Shop"),
+                              ],
+                            ),
+                            const Icon(Icons.coffee_maker),
+                          ],
+                        ),
                       ),
                     ),
                   ],
